@@ -23,8 +23,7 @@ export default async function handler(req, res) {
     );
     const tokenData = await tokenRes.json();
     const token = tokenData.tenant_access_token;
-    if (!token) throw new Error('Failed to get access token');
-
+    if (!token) throw new Error(`Token error: ${JSON.stringify(tokenData)} | APP_ID set: ${!!APP_ID} | SECRET set: ${!!APP_SECRET}`);
     // 2. Search Lark Base records by phone number
     let records = [], pageToken = null, hasMore = true;
 
